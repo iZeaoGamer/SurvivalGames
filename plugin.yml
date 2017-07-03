@@ -4,7 +4,6 @@ description: SurvivalGames plugin.
 main: Zeao\Main
 version: 0.1dev
 api: [3.0.0-ALPHA6, 3.0.1]
-load: STARTUP
 
 commands:
     sg:
