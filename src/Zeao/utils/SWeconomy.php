@@ -37,7 +37,7 @@
  * - no one
  *
  */
-namespace Zeao;
+namespace Zeao\utils;
 use Zeao\sg\SGmain;
 use pocketmine\plugin\Plugin;
 use pocketmine\Player;
