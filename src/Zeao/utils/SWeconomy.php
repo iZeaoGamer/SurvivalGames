@@ -7,8 +7,8 @@
  * \__ \  \ / /  | | | | |  __/
  * |___/   \_/   |_| |_|  \___|
  *
- * SkyWars plugin for PocketMine-MP & forks
- *
+ * SurvivalGames plugin for PocketMine-MP & forks
+ * Edited by Zeao, the original code from SW_Svile. The official, maybe even the best bug free survivalgames plugin.
  * @Author: svile
  * @Kik: _svile_
  * @Telegram_Group: https://telegram.me/svile
@@ -37,7 +37,7 @@
  * - no one
  *
  */
-namespace Zeao\sg\utils;
+namespace Zeao;
 use Zeao\sg\SGmain;
 use pocketmine\plugin\Plugin;
 use pocketmine\Player;
