@@ -38,7 +38,7 @@
  *
  */
 
-namespace Zeao\sg;
+namespace Zeao;
 
 use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
@@ -50,11 +50,11 @@ use pocketmine\block\Block;
 use pocketmine\nbt\tag\StringTag as Str;
         #Use this for PHP5
 //use pocketmine\nbt\tag\String as Str;
-class SWcommands
+class SGcommands
 {
-    /** @var SGmain */
+    /** @var Main */
     private $pg;
-    public function __construct(SGmain $plugin)
+    public function __construct(Main $plugin)
     {
         $this->pg = $plugin;
     }
