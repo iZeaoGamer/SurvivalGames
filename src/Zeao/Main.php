@@ -52,13 +52,13 @@ use pocketmine\utils\TextFormat;
 use pocketmine\item\Item;
 use pocketmine\tile\Sign;
 use pocketmine\math\Vector3;
-class Main.php extends PluginBase
+class Main extends PluginBase
 {
     /** Plugin Version */
     const SG_VERSION = '0.1dev';
-    /** @var SWcommands */
+    /** @var SGcommands */
     private $commands;
-    /** @var SWarena[] */
+    /** @var SGarena[] */
     public $arenas = [];
     /** @var array */
     public $signs = [];
@@ -139,7 +139,7 @@ class Main.php extends PluginBase
                   \___| \___/ |_| |_||_|  |_| \__, ||___/(_) \__, ||_| |_| |_||_|
                                               |___/          |___/
         */
-        $this->configs = new Config($this->getDataFolder() . 'SW_configs.yml', CONFIG::YAML, [
+        $this->configs = new Config($this->getDataFolder() . 'SG_configs.yml', CONFIG::YAML, [
             'CONFIG_VERSION' => self::SW_VERSION,
             'banned.commands.while.in.game' => array('/hub', '/lobby', '/spawn', '/tpa', '/tp', '/tpaccept', '/back', '/home', '/f', '/kill'),
             'start.when.full' => true,
@@ -218,7 +218,7 @@ class Main.php extends PluginBase
             $this->getLogger()->error('An error occurred loading the SG_svile plugin, try deleting the plugin folder');
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
-        //svile\sw\SWcommands
+        //svile\sg\SGcommands
         $this->commands = new SWcommands($this);
         if ($this->configs['reward.winning.players']) {
             //\svile\sw\utils\SWeconomy
