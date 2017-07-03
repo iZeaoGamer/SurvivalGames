@@ -52,7 +52,7 @@ use pocketmine\nbt\tag\StringTag as Str;
 //use pocketmine\nbt\tag\String as Str;
 class SWcommands
 {
-    /** @var SWmain */
+    /** @var SGmain */
     private $pg;
     public function __construct(SGmain $plugin)
     {
