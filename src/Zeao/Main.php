@@ -36,7 +36,7 @@
  * - no one
  *
  */
-namespace Zeao\Main\Main;
+namespace Zeao\SG_svile;
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
