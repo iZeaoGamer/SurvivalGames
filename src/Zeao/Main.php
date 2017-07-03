@@ -36,7 +36,7 @@
  * - no one
  *
  */
-namespace Zeao\sg;
+namespace Zeao\Main;
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
