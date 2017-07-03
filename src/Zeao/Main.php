@@ -36,7 +36,7 @@
  * - no one
  *
  */
-namespace Zeao\SG_svile;
+namespace Zeao\Main;
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
@@ -52,7 +52,7 @@ use pocketmine\utils\TextFormat;
 use pocketmine\item\Item;
 use pocketmine\tile\Sign;
 use pocketmine\math\Vector3;
-class Main extends PluginBase
+class Main.php extends PluginBase
 {
     /** Plugin Version */
     const SG_VERSION = '0.1dev';
