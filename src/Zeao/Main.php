@@ -52,10 +52,10 @@ use pocketmine\utils\TextFormat;
 use pocketmine\item\Item;
 use pocketmine\tile\Sign;
 use pocketmine\math\Vector3;
-class SGmain extends PluginBase
+class Main extends PluginBase
 {
     /** Plugin Version */
-    const SW_VERSION = '0.7dev';
+    const SG_VERSION = '0.1dev';
     /** @var SWcommands */
     private $commands;
     /** @var SWarena[] */
