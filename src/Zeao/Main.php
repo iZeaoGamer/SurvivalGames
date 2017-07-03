@@ -101,7 +101,7 @@ class Main extends PluginBase
     }
     public function onEnable()
     {
-        if ($this->getDescription()->getVersion() != self::SW_VERSION)
+        if ($this->getDescription()->getVersion() != self::SG_VERSION)
             $this->getLogger()->critical(@gzinflate(@base64_decode('C8lILUpVyCxWSFQoKMpPyknNVSjPLMlQKMlIVSjIKU3PzFMoSy0qzszPAwA=')));
         if (@array_shift($this->getDescription()->getAuthors()) != "\x73\x76\x69\x6c\x65" || $this->getDescription()->getName() != "\x53\x57\x5f\x73\x76\x69\x6c\x65" || $this->getDescription()->getVersion() != self::SW_VERSION) {
             $this->getLogger()->notice(@gzinflate(@base64_decode('LYxBDsIwDAS/sg8ozb1/QEICiXOo3NhKiKvYqeD3hcJtNaPZGxNid9YGXeAshrX0JBWfZZsUGrCJif9ckZrhikRfQGgUyz+YwO6rTSEkce6PcdZnOB5e4Zrf99jsdNE5k5+l0g4=')));
@@ -120,14 +120,14 @@ class Main extends PluginBase
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
         //Config file...
-        $v = ((new Config($this->getDataFolder() . 'SW_configs.yml', CONFIG::YAML))->get('CONFIG_VERSION', '1st'));
-        if ($v != '1st' && $v != self::SW_VERSION) {
+        $v = ((new Config($this->getDataFolder() . 'SG_configs.yml', CONFIG::YAML))->get('CONFIG_VERSION', '1st'));
+        if ($v != '1st' && $v != self::SG_VERSION) {
             $this->getLogger()->notice('You are using old configs, deleting them.Make sure to delete old arenas if aren\'t working');
-            @unlink($this->getDataFolder() . 'SW_configs.yml');
-            @unlink($this->getDataFolder() . 'SW_lang.yml');
-            $this->saveResource('SW_configs.yml', true);
+            @unlink($this->getDataFolder() . 'SG_configs.yml');
+            @unlink($this->getDataFolder() . 'SG_lang.yml');
+            $this->saveResource('SG_configs.yml', true);
         } elseif ($v == '1st') {
-            $this->saveResource('SW_configs.yml', true);
+            $this->saveResource('SG_configs.yml', true);
         }
         unset($v);
         //Config files: /SW_configs.yml /SW_lang.yml & for arenas: /arenas/SWname/settings.yml
@@ -140,7 +140,7 @@ class Main extends PluginBase
                                               |___/          |___/
         */
         $this->configs = new Config($this->getDataFolder() . 'SG_configs.yml', CONFIG::YAML, [
-            'CONFIG_VERSION' => self::SW_VERSION,
+            'CONFIG_VERSION' => self::SG_VERSION,
             'banned.commands.while.in.game' => array('/hub', '/lobby', '/spawn', '/tpa', '/tp', '/tpaccept', '/back', '/home', '/f', '/kill'),
             'start.when.full' => true,
             'needed.players.to.run.countdown' => 1,
