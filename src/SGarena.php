@@ -37,7 +37,7 @@
  * - no one
  *
  */
-namespace Zeao\sg;
+namespace Zeao\SG_svile;
 
 
 use pocketmine\Player;
