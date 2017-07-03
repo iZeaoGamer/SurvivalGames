@@ -37,7 +37,7 @@
  * - no one
  *
  */
-namespace svile\sw;
+namespace Zeao;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
