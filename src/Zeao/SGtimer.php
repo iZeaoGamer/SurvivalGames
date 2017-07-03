@@ -37,7 +37,7 @@
  * - no one
  *
  */
-namespace svile\sg;
+namespace Zeao;
 use pocketmine\scheduler\PluginTask;
 class SGtimer extends PluginTask
 {
