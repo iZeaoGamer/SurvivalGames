@@ -84,17 +84,17 @@ class Main extends PluginBase
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
         //Config file...
-        $v = ((new Config($this->getDataFolder() . 'SG_configs.yml', CONFIG::YAML))->get('CONFIG_VERSION', '1st'));
+        $v = ((new Config($this->getDataFolder() . 'config.yml', CONFIG::YAML))->get('CONFIG_VERSION', '1st'));
         if ($v != '1st' && $v != self::SG_VERSION) {
             $this->getLogger()->notice('You are using old configs, deleting them.Make sure to delete old arenas if aren\'t working');
-            @unlink($this->getDataFolder() . 'SG_configs.yml');
-            @unlink($this->getDataFolder() . 'SG_lang.yml');
+            @unlink($this->getDataFolder() . 'config.yml');
+            @unlink($this->getDataFolder() . 'lang.yml');
             $this->saveResource('SG_configs.yml', true);
         } elseif ($v == '1st') {
             $this->saveResource('SG_configs.yml', true);
         }
         unset($v);
-        //Config files: /SW_configs.yml /SW_lang.yml & for arenas: /arenas/SWname/settings.yml
+        //Config files: /config.yml /lang.yml & for arenas: /arenas/SGname/settings.yml
         /*
                                        __  _                                   _
                    ___   ___   _ __   / _|(_)  __ _  ___     _   _  _ __ ___  | |
@@ -103,7 +103,7 @@ class Main extends PluginBase
                   \___| \___/ |_| |_||_|  |_| \__, ||___/(_) \__, ||_| |_| |_||_|
                                               |___/          |___/
         */
-        $this->configs = new Config($this->getDataFolder() . 'SG_configs.yml', CONFIG::YAML, [
+        $this->configs = new Config($this->getDataFolder() . 'config.yml', CONFIG::YAML, [
             'CONFIG_VERSION' => self::SG_VERSION,
             'banned.commands.while.in.game' => array('/hub', '/lobby', '/spawn', '/tpa', '/tp', '/tpaccept', '/back', '/home', '/f', '/kill'),
             'start.when.full' => true,
@@ -146,7 +146,7 @@ class Main extends PluginBase
                  |_|  \__,_| |_| |_|  \__, | (_)  \__, | |_| |_| |_| |_|
                                       |___/       |___/
         */
-        $this->lang = new Config($this->getDataFolder() . 'SG_lang.yml', CONFIG::YAML, [
+        $this->lang = new Config($this->getDataFolder() . 'lang.yml', CONFIG::YAML, [
             'banned.command.msg' => '@b→@cYou can\'t use this command here',
             'sign.game.full' => '@b→@cThis game is full, please wait',
             'sign.game.running' => '@b→@cThe game is running, please wait',
@@ -165,7 +165,7 @@ class Main extends PluginBase
             'server.broadcast.winner' => '@0→@f{PLAYER} @bwon the game on SW: @f{SWNAME}',
             'winner.reward.msg' => '@f→@bYou won @f{VALUE}$_EOL_@f→@7Your money: @f{MONEY}$'
         ]);
-        touch($this->getDataFolder() . 'SG_lang.yml');
+        touch($this->getDataFolder() . 'lang.yml');
         $this->lang = $this->lang->getAll();
         file_put_contents($this->getDataFolder() . 'SG_lang.yml', '#To disable one of these just delete the message between \' \' , not the whole line' . PHP_EOL . '#You can use " @ " to set colors and _EOL_ as EndOfLine' . PHP_EOL . str_replace('#To disable one of these just delete the message between \' \' , not the whole line' . PHP_EOL . '#You can use " @ " to set colors and _EOL_ as EndOfLine' . PHP_EOL, '', file_get_contents($this->getDataFolder() . 'SW_lang.yml')));
         $newlang = [];
@@ -186,7 +186,7 @@ class Main extends PluginBase
         $this->commands = new SGcommands($this);
         if ($this->configs['reward.winning.players']) {
             //\Zeao\utils\SWeconomy
-            $this->economy = new \Zeao\utils\SWeconomy($this);
+            $this->economy = new \Zeao\utils\SGeconomy($this);
             if ($this->economy->getApiVersion()) {
                 $this->getLogger()->info('§aUsing: §f' . $this->economy->getApiVersion(true) . '§a as economy api');
             } else {
@@ -260,7 +260,7 @@ class Main extends PluginBase
             return true;
     }
     /**
-     * @param string $SWname
+     * @param string $SGname
      * @param int $x
      * @param int $y
      * @param int $z
