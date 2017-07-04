@@ -1,9 +1,10 @@
 name: SurvivalGames
 author: Zeao
-description: SurvivalGames plugin.
+description: A awesome SurvivalGames plugin.
 main: Zeao\Main
 version: 1.0.0
 api: [3.0.0-ALPHA6, 3.0.1]
+LOAD: STARTUP
 
 commands:
     sg:
