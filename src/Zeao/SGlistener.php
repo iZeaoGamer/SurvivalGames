@@ -62,9 +62,9 @@ use pocketmine\utils\TextFormat;
 use pocketmine\math\Vector3;
 class SGlistener implements Listener
 {
-    /** @var SGmain */
+    /** @var Main */
     private $pg;
-    public function __construct(SGmain $plugin)
+    public function __construct(Main $plugin)
     {
         $this->pg = $plugin;
     }
