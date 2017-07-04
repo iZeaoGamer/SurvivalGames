@@ -12,7 +12,7 @@ class economy
     const MassiveEconomy = 3;
     /** @var int */
     private $ver = 0;
-    /** @var SWmain */
+    /** @var Main */
     private $pg;
     /** @var bool|\pocketmine\plugin\Plugin */
     private $api;
@@ -20,7 +20,7 @@ class economy
     {
         $this->pg = $plugin;
         $api = $this->pg->getServer()->getPluginManager()->getPlugin('EconomyAPI');
-        if ($api != false && $api instanceof Plugin && $api->getDescription()->getVersion() == '2.0.9') {
+        if ($api != false && $api instanceof Plugin && $api->getDescription()->getVersion() == '5.7') {
             $this->ver = self::EconomyAPI;
             $this->api = $api;
             return;
