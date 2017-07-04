@@ -55,7 +55,7 @@ use pocketmine\math\Vector3;
 class Main extends PluginBase
 {
     /** Plugin Version */
-    const SG_VERSION = '0.1dev';
+    const SG_VERSION = '1.0.0';
     /** @var SGcommands */
     private $commands;
     /** @var SGarena[] */
@@ -68,7 +68,7 @@ class Main extends PluginBase
     public $lang;
     /** @var \SQLite3 */
     private $db;
-    /** @var \svile\sg\utils\SWeconomy */
+    /** @var \Zeao\utils\SWeconomy */
     public $economy;
     public function onLoad()
     {
@@ -201,9 +201,9 @@ class Main extends PluginBase
             'server.broadcast.winner' => '@0→@f{PLAYER} @bwon the game on SW: @f{SWNAME}',
             'winner.reward.msg' => '@f→@bYou won @f{VALUE}$_EOL_@f→@7Your money: @f{MONEY}$'
         ]);
-        touch($this->getDataFolder() . 'SW_lang.yml');
+        touch($this->getDataFolder() . 'SG_lang.yml');
         $this->lang = $this->lang->getAll();
-        file_put_contents($this->getDataFolder() . 'SW_lang.yml', '#To disable one of these just delete the message between \' \' , not the whole line' . PHP_EOL . '#You can use " @ " to set colors and _EOL_ as EndOfLine' . PHP_EOL . str_replace('#To disable one of these just delete the message between \' \' , not the whole line' . PHP_EOL . '#You can use " @ " to set colors and _EOL_ as EndOfLine' . PHP_EOL, '', file_get_contents($this->getDataFolder() . 'SW_lang.yml')));
+        file_put_contents($this->getDataFolder() . 'SG_lang.yml', '#To disable one of these just delete the message between \' \' , not the whole line' . PHP_EOL . '#You can use " @ " to set colors and _EOL_ as EndOfLine' . PHP_EOL . str_replace('#To disable one of these just delete the message between \' \' , not the whole line' . PHP_EOL . '#You can use " @ " to set colors and _EOL_ as EndOfLine' . PHP_EOL, '', file_get_contents($this->getDataFolder() . 'SW_lang.yml')));
         $newlang = [];
         foreach ($this->lang as $key => $val) {
             $newlang[$key] = str_replace('  ', ' ', str_replace('_EOL_', "\n", str_replace('@', '§', trim($val))));
@@ -218,11 +218,11 @@ class Main extends PluginBase
             $this->getLogger()->error('An error occurred loading the SG_svile plugin, try deleting the plugin folder');
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
-        //svile\sg\SGcommands
-        $this->commands = new SWcommands($this);
+        //Zeao\SGcommands
+        $this->commands = new SGcommands($this);
         if ($this->configs['reward.winning.players']) {
-            //\svile\sw\utils\SWeconomy
-            $this->economy = new \svile\sg\utils\SWeconomy($this);
+            //\Zeao\utils\SWeconomy
+            $this->economy = new \Zeao\utils\SWeconomy($this);
             if ($this->economy->getApiVersion()) {
                 $this->getLogger()->info('§aUsing: §f' . $this->economy->getApiVersion(true) . '§a as economy api');
             } else {
