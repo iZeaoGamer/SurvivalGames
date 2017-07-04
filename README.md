@@ -1,5 +1,5 @@
-# SurvivalGames-Pocketmine
-Welcome to the SurvivalGames plugin! Code edited by Zeao, plugin inspired by sw_svile 
+# SurvivalGames
+Welcome to the SurvivalGames plugin! 
 
 ## UPDATED
 
@@ -8,7 +8,7 @@ A download will be available shortly, or you can go to our poggit page, @ https:
 
 This should work on the latest versions: V1.1. At this moment, we think there may be hardly any bugs. But if there is, please open an issue and report it. We will be glad to help. :)
 
-## HOW TO INSTALl
+## HOW TO INSTALL
 
 1. Download the plugin on our releases tab on git hub, or get it on our poggit page. Link above.
 
