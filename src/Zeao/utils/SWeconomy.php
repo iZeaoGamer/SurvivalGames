@@ -38,7 +38,7 @@
  *
  */
 namespace Zeao\utils;
-use Zeao\sg\SGmain;
+use Zeao\Main;
 use pocketmine\plugin\Plugin;
 use pocketmine\Player;
 class SWeconomy
@@ -52,7 +52,7 @@ class SWeconomy
     private $pg;
     /** @var bool|\pocketmine\plugin\Plugin */
     private $api;
-    public function __construct(SGmain $plugin)
+    public function __construct(Main $plugin)
     {
         $this->pg = $plugin;
         $api = $this->pg->getServer()->getPluginManager()->getPlugin('EconomyAPI');
