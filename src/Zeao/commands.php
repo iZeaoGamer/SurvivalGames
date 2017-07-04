@@ -38,8 +38,8 @@ class commands
                     }
                     if (isset($args[0])) {
                         //SG NAME
-                        $SWname = TextFormat::clean(array_shift($args));
-                        if (!array_key_exists($SWname, $this->pg->arenas)) {
+                        $SGname = TextFormat::clean(array_shift($args));
+                        if (!array_key_exists($SGname, $this->pg->arenas)) {
                             $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'Arena with name: ' . TextFormat::WHITE . $SGname . TextFormat::RED . ' doesn\'t exist');
                             break;
                         }
