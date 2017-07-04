@@ -5,7 +5,7 @@ CONFIG_VERSION: 1.0.0dev
 
 ###########################################_GAME_###########################################
 
-# Players playing Survivalgame won't be able to run these commands.
+# Players playing Survivalgames won't be able to run these commands.
 # You can add or delete commands but make sure to respect syntax.
 banned.commands.while.in.game:
 - /hub
@@ -39,7 +39,7 @@ join.max.health: 20
 join.health: 20
 # ------------------------------------------\HEALTH-----------------------------------------
 
-# Players playing a SkyWars game won't be damaged from the following causes.
+# Players playing Survivalgames won't be damaged from the following causes.
 # 0 = CAUSE_CONTACT
 # 1 = CAUSE_ENTITY_ATTACK
 # 2 = CAUSE_PROJECTILE
@@ -110,8 +110,8 @@ reward.command: '/'
 ########################################_JOIN-SIGNS_########################################
 
 # Signs format.
-1st_line: §l§c[§bSW§c]
-2nd_line: §l§e{SWNAME}
+1st_line: §l§c[§bSG§c]
+2nd_line: §l§e{SGNAME}
 
 # Refreshes signs each 5 seconds.
 # Hint : This is useful if you often see signs displaying wrong info about SW games.
