@@ -86,7 +86,7 @@ class Main extends PluginBase
         //Config file...
         $v = ((new Config($this->getDataFolder() . 'config.yml', CONFIG::YAML))->get('CONFIG_VERSION', '1st'));
         if ($v != '1st' && $v != self::SG_VERSION) {
-            $this->getLogger()->notice('You are using old configs, deleting them.Make sure to delete old arenas if aren\'t working');
+            $this->getLogger()->notice('A new update is available with the config files. Updating them, and re-adding them. Updating the config files. Make sure to delete old arenas if aren\'t working');
             @unlink($this->getDataFolder() . 'config.yml');
             @unlink($this->getDataFolder() . 'lang.yml');
             $this->saveResource('config.yml', true);
