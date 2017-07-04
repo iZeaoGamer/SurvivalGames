@@ -1,42 +1,5 @@
 <?php
 
-/*
- *                _   _
- *  ___  __   __ (_) | |   ___
- * / __| \ \ / / | | | |  / _ \
- * \__ \  \ / /  | | | | |  __/
- * |___/   \_/   |_| |_|  \___|
- *
- * SkyWars plugin for PocketMine-MP & forks
- *
- * @Author: svile
- * @Kik: _svile_
- * @Telegram_Group: https://telegram.me/svile
- * @E-mail: thesville@gmail.com
- * @Github: https://github.com/svilex/SkyWars-PocketMine
- *
- * Copyright (C) 2016 svile
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- *
- * DONORS LIST :
- * - Ahmet
- * - Jinsong Liu
- * - no one
- *
- */
 namespace Zeao;
 
 
@@ -57,7 +20,7 @@ final class SGarena
     /** @var SWmain */
     private $pg;
     /** @var string */
-    private $SWname;
+    private $SGname;
     /** @var int */
     private $slot;
     /** @var string */
@@ -77,7 +40,7 @@ final class SGarena
     /** @var array */
     private $spectators = [];
     /**
-     * @param SWmain $plugin
+     * @param Main $plugin
      * @param string $SGname
      * @param int $slot
      * @param string $world
@@ -85,10 +48,10 @@ final class SGarena
      * @param int $maxtime
      * @param int $void
      */
-    public function __construct(SWmain $plugin, $SGname = 'sg', $slot = 0, $world = 'world', $countdown = 60, $maxtime = 300, $void = 0)
+    public function __construct(Main $plugin, $SGname = 'sg', $slot = 0, $world = 'world', $countdown = 60, $maxtime = 300, $void = 0)
     {
         $this->pg = $plugin;
-        $this->SWname = $SGname;
+        $this->SGname = $SGname;
         $this->slot = ($slot + 0);
         $this->world = $world;
         $this->countdown = ($countdown + 0);
@@ -126,7 +89,7 @@ final class SGarena
         } else {
             if (is_file($this->pg->getDataFolder() . 'arenas/' . $this->SWname . '/' . $this->world . '.tar'))
                 $tar = new \PharData($this->pg->getDataFolder() . 'arenas/' . $this->SWname . '/' . $this->world . '.tar');
-            elseif (is_file($this->pg->getDataFolder() . 'arenas/' . $this->SWname . '/' . $this->world . '.tar.gz'))
+            elseif (is_file($this->pg->getDataFolder() . 'arenas/' . $this->SGname . '/' . $this->world . '.tar.gz'))
                 $tar = new \PharData($this->pg->getDataFolder() . 'arenas/' . $this->SWname . '/' . $this->world . '.tar.gz');
             else
                 return false;//WILL NEVER REACH THIS
@@ -224,7 +187,7 @@ final class SGarena
             $player->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'This arena have only got ' . TextFormat::WHITE . $this->slot . TextFormat::RED . ' slots');
             return false;
         }
-        $config = new Config($this->pg->getDataFolder() . 'arenas/' . $this->SWname . '/settings.yml', CONFIG::YAML);
+        $config = new Config($this->pg->getDataFolder() . 'arenas/' . $this->SGname . '/settings.yml', CONFIG::YAML);
         if (empty($config->get('spawns', []))) {
             $keys = [];
             for ($i = $this->slot; $i >= 1; $i--) {
