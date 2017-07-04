@@ -103,7 +103,7 @@ class Main extends PluginBase
                   \___| \___/ |_| |_||_|  |_| \__, ||___/(_) \__, ||_| |_| |_||_|
                                               |___/          |___/
         */
-        $this->configs = new Config($this->getDataFolder() . 'config.yml', CONFIG::YAML, [
+        $this->configs = new Config($this->getDataFolder() . 'configs.yml', CONFIG::YAML, [
             'CONFIG_VERSION' => self::SG_VERSION,
             'banned.commands.while.in.game' => array('/hub', '/lobby', '/spawn', '/tpa', '/tp', '/tpaccept', '/back', '/home', '/f', '/kill'),
             'start.when.full' => true,
