@@ -24,7 +24,7 @@ use pocketmine\level\Location;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 use pocketmine\math\Vector3;
-class sglistener implements Listener
+class eventlistener implements Listener
 {
     /** @var Main */
     private $pg;
