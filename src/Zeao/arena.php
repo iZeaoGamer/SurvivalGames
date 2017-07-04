@@ -13,7 +13,7 @@ use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
 use pocketmine\tile\Chest;
 use pocketmine\item\Item;
-final class SGarena
+final class arena
 {
     /** @var int */
     public $GAME_STATE = 0;//0 -> GAME_COUNTDOWN | 1 -> GAME_RUNNING | 2 -> no-pvp
