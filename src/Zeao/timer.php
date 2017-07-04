@@ -2,7 +2,7 @@
 
 namespace Zeao;
 use pocketmine\scheduler\PluginTask;
-class SGtimer extends PluginTask
+class timer extends PluginTask
 {
     /** @var int */
     private $seconds = 0;
