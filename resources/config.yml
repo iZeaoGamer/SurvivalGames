@@ -30,11 +30,11 @@ needed.players.to.run.countdown: 1
 #                2 = 1 heart
 #                 ...etc...
 
-# The players max health will be set to this value when joining a SkyWars game.
+# The players max health will be set to this value when joining SurvivalGames.
 # N.B : This value can increase for players with HEALTH BOOST effects
 join.max.health: 20
 
-# The players health will be set to this value when joining a SkyWars game.
+# The players health will be set to this value when joining a SurvivalGames match.
 # N.B : If greater than the player max health , max health will be used instead.
 join.health: 20
 # ------------------------------------------\HEALTH-----------------------------------------
@@ -65,10 +65,10 @@ damage.cancelled.causes:
 - 12
 - 15
 
-# Players playing a SkyWars game won't drop anything on death if this option = "false".
+# Players playing a SurvivalGames match won't drop anything on death if this option = "false".
 drops.on.death: false
 
-# Players playing a SkyWars game won't be able to drop items if this option = "false".
+# Players playing a SurvivalGames match game won't be able to drop items if this option = "false".
 player.drop.item: true
 
 # This is the refill chests' switch. You can decide to refill chests or not.
