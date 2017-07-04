@@ -23,7 +23,7 @@ use pocketmine\level\Location;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 use pocketmine\math\Vector3;
-class SGlistener implements Listener
+class listener implements Listener
 {
     /** @var Main */
     private $pg;
