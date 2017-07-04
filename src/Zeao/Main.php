@@ -20,9 +20,9 @@ class Main extends PluginBase
 {
     /** Plugin Version */
     const SG_VERSION = '1.0.0';
-    /** @var SGcommands */
+    /** @var commands */
     private $commands;
-    /** @var SGarena[] */
+    /** @var arena[] */
     public $arenas = [];
     /** @var array */
     public $signs = [];
@@ -32,7 +32,7 @@ class Main extends PluginBase
     public $lang;
     /** @var \SQLite3 */
     private $db;
-    /** @var \Zeao\utils\SWeconomy */
+    /** @var \Zeao\utils\economy */
     public $economy;
     public function onLoad()
     {
@@ -89,9 +89,9 @@ class Main extends PluginBase
             $this->getLogger()->notice('You are using old configs, deleting them.Make sure to delete old arenas if aren\'t working');
             @unlink($this->getDataFolder() . 'config.yml');
             @unlink($this->getDataFolder() . 'lang.yml');
-            $this->saveResource('SG_configs.yml', true);
+            $this->saveResource('config.yml', true);
         } elseif ($v == '1st') {
-            $this->saveResource('SG_configs.yml', true);
+            $this->saveResource('config.yml', true);
         }
         unset($v);
         //Config files: /config.yml /lang.yml & for arenas: /arenas/SGname/settings.yml
@@ -167,7 +167,7 @@ class Main extends PluginBase
         ]);
         touch($this->getDataFolder() . 'lang.yml');
         $this->lang = $this->lang->getAll();
-        file_put_contents($this->getDataFolder() . 'SG_lang.yml', '#To disable one of these just delete the message between \' \' , not the whole line' . PHP_EOL . '#You can use " @ " to set colors and _EOL_ as EndOfLine' . PHP_EOL . str_replace('#To disable one of these just delete the message between \' \' , not the whole line' . PHP_EOL . '#You can use " @ " to set colors and _EOL_ as EndOfLine' . PHP_EOL, '', file_get_contents($this->getDataFolder() . 'SW_lang.yml')));
+        file_put_contents($this->getDataFolder() . 'lang.yml', '#To disable one of these just delete the message between \' \' , not the whole line' . PHP_EOL . '#You can use " @ " to set colors and _EOL_ as EndOfLine' . PHP_EOL . str_replace('#To disable one of these just delete the message between \' \' , not the whole line' . PHP_EOL . '#You can use " @ " to set colors and _EOL_ as EndOfLine' . PHP_EOL, '', file_get_contents($this->getDataFolder() . 'SW_lang.yml')));
         $newlang = [];
         foreach ($this->lang as $key => $val) {
             $newlang[$key] = str_replace('  ', ' ', str_replace('_EOL_', "\n", str_replace('@', '§', trim($val))));
@@ -175,18 +175,18 @@ class Main extends PluginBase
         $this->lang = $newlang;
         unset($newlang);
         //Register timer and listener
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new SWtimer($this), 19);
-        $this->getServer()->getPluginManager()->registerEvents(new SWlistener($this), $this);
+        $this->getServer()->getScheduler()->scheduleRepeatingTask(new timer($this), 19);
+        $this->getServer()->getPluginManager()->registerEvents(new eventlistener($this), $this);
         //Calls loadArenas() & loadSigns() to loads arenas & signs...
         if (!($this->loadSigns() && $this->loadArenas())) {
-            $this->getLogger()->error('An error occurred loading the SG_svile plugin, try deleting the plugin folder');
+            $this->getLogger()->error('An error occurred loading the SurvivalGames plugin, try deleting the plugin folder');
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
-        //Zeao\SGcommands
-        $this->commands = new SGcommands($this);
+        //Zeao\commands
+        $this->commands = new commands($this);
         if ($this->configs['reward.winning.players']) {
-            //\Zeao\utils\SWeconomy
-            $this->economy = new \Zeao\utils\SGeconomy($this);
+            //\Zeao\utils\economy
+            $this->economy = new \Zeao\utils\economy($this);
             if ($this->economy->getApiVersion()) {
                 $this->getLogger()->info('§aUsing: §f' . $this->economy->getApiVersion(true) . '§a as economy api');
             } else {
