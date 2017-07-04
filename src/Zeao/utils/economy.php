@@ -5,7 +5,7 @@ namespace Zeao\utils;
 use Zeao\Main;
 use pocketmine\plugin\Plugin;
 use pocketmine\Player;
-class SGeconomy
+class economy
 {
     const EconomyAPI = 1;
     const PocketMoney = 2;
