@@ -12,7 +12,7 @@ use pocketmine\block\Block;
 use pocketmine\nbt\tag\StringTag as Str;
         #Use this for PHP5
 //use pocketmine\nbt\tag\String as Str;
-class SGcommands
+class commands
 {
     /** @var Main */
     private $pg;
@@ -61,7 +61,7 @@ class SGcommands
                                 $p->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'You are already inside an arena');
                                 break;
                             }
-                            $this->pg->arenas[$SWname]->join($p);
+                            $this->pg->arenas[$SGname]->join($p);
                         } else {
                             $sender->sendMessage(TextFormat::RED . 'Player not found!');
                         }
@@ -70,7 +70,7 @@ class SGcommands
                             $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'You are already inside an arena');
                             break;
                         }
-                        $this->pg->arenas[$SWname]->join($sender);
+                        $this->pg->arenas[$SGname]->join($sender);
                     } else {
                         $sender->sendMessage(TextFormat::RED . 'Player not found!');
                     }
