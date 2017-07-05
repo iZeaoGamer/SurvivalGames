@@ -84,17 +84,17 @@ class Main extends PluginBase
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
         //Config file...
-        $v = ((new Config($this->getDataFolder() . 'config.yml', CONFIG::YAML))->get('CONFIG_VERSION', '1st'));
+        $v = ((new Config($this->getDataFolder() . 'configs.yml', CONFIG::YAML))->get('CONFIG_VERSION', '1st'));
         if ($v != '1st' && $v != self::SG_VERSION) {
             $this->getLogger()->notice('A new update is available with the config files. Updating them, and re-adding them. Updating the config files. Make sure to delete old arenas if aren\'t working');
-            @unlink($this->getDataFolder() . 'config.yml');
+            @unlink($this->getDataFolder() . 'configs.yml');
             @unlink($this->getDataFolder() . 'lang.yml');
             $this->saveResource('config.yml', true);
         } elseif ($v == '1st') {
             $this->saveResource('config.yml', true);
         }
         unset($v);
-        //Config files: /config.yml /lang.yml & for arenas: /arenas/SGname/settings.yml
+        //Config files: /configs.yml /lang.yml & for arenas: /arenas/SGname/settings.yml
         /*
                                        __  _                                   _
                    ___   ___   _ __   / _|(_)  __ _  ___     _   _  _ __ ___  | |
@@ -235,7 +235,7 @@ class Main extends PluginBase
                         'void_Y' => 0,
                         'spawns' => [],
                     ]);
-                    $this->arenas[$config->get('name')] = new SGarena($this, $config->get('name'), ($config->get('slot') + 0), $config->get('world'), ($config->get('countdown') + 0), ($config->get('maxGameTime') + 0), ($config->get('void_Y') + 0));
+                    $this->arenas[$config->get('name')] = new arena($this, $config->get('name'), ($config->get('slot') + 0), $config->get('world'), ($config->get('countdown') + 0), ($config->get('maxGameTime') + 0), ($config->get('void_Y') + 0));
                     unset($config);
                 } else {
                     return false;
