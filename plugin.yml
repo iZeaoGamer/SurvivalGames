@@ -2,7 +2,7 @@ name: SurvivalGames
 author: Zeao
 description: The Main SurvivalGames plugin, the official and soon may be bug free.
 main: Zeao\Main
-version: 1.0.1
+version: 1.0.0
 api: [3.0.0-ALPHA6, 3.0.1]
 LOAD: STARTUP
 
