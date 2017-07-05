@@ -17,7 +17,7 @@ final class arena
 {
     /** @var int */
     public $GAME_STATE = 0;//0 -> GAME_COUNTDOWN | 1 -> GAME_RUNNING | 2 -> no-pvp
-    /** @var SWmain */
+    /** @var main */
     private $pg;
     /** @var string */
     private $SGname;
@@ -87,10 +87,10 @@ final class arena
             $this->pg->getServer()->loadLevel($this->world);
             $this->pg->getServer()->getLevelByName($this->world)->setAutoSave(false);
         } else {
-            if (is_file($this->pg->getDataFolder() . 'arenas/' . $this->SWname . '/' . $this->world . '.tar'))
-                $tar = new \PharData($this->pg->getDataFolder() . 'arenas/' . $this->SWname . '/' . $this->world . '.tar');
+            if (is_file($this->pg->getDataFolder() . 'arenas/' . $this->SGname . '/' . $this->world . '.tar'))
+                $tar = new \PharData($this->pg->getDataFolder() . 'arenas/' . $this->SGname . '/' . $this->world . '.tar');
             elseif (is_file($this->pg->getDataFolder() . 'arenas/' . $this->SGname . '/' . $this->world . '.tar.gz'))
-                $tar = new \PharData($this->pg->getDataFolder() . 'arenas/' . $this->SWname . '/' . $this->world . '.tar.gz');
+                $tar = new \PharData($this->pg->getDataFolder() . 'arenas/' . $this->SGname . '/' . $this->world . '.tar.gz');
             else
                 return false;//WILL NEVER REACH THIS
             $tar->extractTo($this->pg->getServer()->getDataPath() . 'worlds/' . $this->world, null, true);
