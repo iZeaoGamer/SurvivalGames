@@ -35,3 +35,6 @@ Then just wait for a stabled release version of the plugin, basically wait until
 
 Thank you, and make sure to stay tuned if you have found a Survivalgames plugin, but most parts are extremly buggy or do not function very well, then you can use this plugin as an alternative. Some bugs as always may occur, but soon, this plugin may be bug-free, and all ready for use. This is why reporting the bug early let's us fix it ASAP.
 Thank you, and we hope that we've fixed most bugs.
+
+
+https://poggit.pmmp.io/ci.badge/iZeaoGamer/SurvivalGames/SurvivalGames-Pocketmine
