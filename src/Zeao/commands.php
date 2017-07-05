@@ -49,7 +49,7 @@ class commands
                                 if ($a->join($sender, false))
                                     break 2;
                             }
-                            $sender->sendMessage(TextFormat::RED . 'No games, retry later');
+                            $sender->sendMessage(TextFormat::RED . 'No games available, retry later');
                         }
                         break;
                     }
@@ -58,7 +58,7 @@ class commands
                         $p = $sender->getServer()->getPlayer($player);
                         if ($p instanceof Player) {
                             if ($this->pg->inArena($p->getName())) {
-                                $p->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'You are already inside an arena');
+                                $p->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'You are already inside an arena. do /sw quit to leave the arena.');
                                 break;
                             }
                             $this->pg->arenas[$SGname]->join($p);
@@ -67,17 +67,17 @@ class commands
                         }
                     } elseif ($sender instanceof Player) {
                         if ($this->pg->inArena($sender->getName())) {
-                            $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'You are already inside an arena');
+                            $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'You are already inside an arena. Do /sg quit to leave the arena.');
                             break;
                         }
                         $this->pg->arenas[$SGname]->join($sender);
                     } else {
-                        $sender->sendMessage(TextFormat::RED . 'Player not found!');
+                        $sender->sendMessage(TextFormat::RED . 'Player cannot be found!');
                     }
                     break;
                 case 'quit':
                     if (!empty($args)) {
-                        $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'Usage: /sg ' . TextFormat::GREEN . 'quit');
+                        $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::GREEN . 'Usage: /sg ' . TextFormat::GREEN . 'quit');
                         break;
                     }
                     if ($sender instanceof Player) {
@@ -91,7 +91,7 @@ class commands
                     break;
                 default:
                     //No option found, usage
-                    $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'Usage: /sg [join|quit]');
+                    $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::GREEN . 'Usage: /sg [join|quit]');
                     break;
             endswitch;
             return true;
@@ -137,7 +137,7 @@ class commands
                         break 2;
                     }
                 }
-                //SW NAME
+                //SG NAME
                 $SGname = array_shift($args);
                 if (!($SGname && preg_match('/^[a-z0-9]+[a-z0-9]$/i', $SGname) && strlen($SGname) < 0x10 && strlen($SGname) > 0b10)) {
                     $sender->sendMessage(TextFormat::WHITE . '→' . TextFormat::AQUA . '[SGname]' . TextFormat::RED . ' must consists of a-z 0-9 (min3-max15)');
@@ -145,9 +145,9 @@ class commands
                     break;
                 }
                 //Checks if the arena already exists
-                if (array_key_exists($SWname, $this->pg->arenas)) {
+                if (array_key_exists($SGname, $this->pg->arenas)) {
                     $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'Arena with name: ' . TextFormat::WHITE . $SGname . TextFormat::RED . ' already exist');
-                    unset($fworld, $world, $SWname);
+                    unset($fworld, $world, $SGname);
                     break;
                 }
                 //ARENA SLOT
@@ -220,7 +220,7 @@ class commands
                 foreach ($sender->getServer()->getLevelByName($world)->getPlayers() as $p)
                     $p->close('', 'Please re-join');
                 $sender->getServer()->unloadLevel($sender->getServer()->getLevelByName($world));
-                //From here @vars are: $SWname , $slot , $world
+                //From here @vars are: $SGname , $slot , $world
                 // { TAR.GZ
                 @mkdir($this->pg->getDataFolder() . 'arenas/' . $SGname, 0755);
                 $tar = new \PharData($this->pg->getDataFolder() . 'arenas/' . $SGname . '/' . $world . '.tar');
@@ -231,13 +231,13 @@ class commands
                 $tar->stopBuffering();
                 if ($this->pg->configs['world.compress.tar']) {
                     $tar = null;
-                    @unlink($this->pg->getDataFolder() . 'arenas/' . $SWname . '/' . $world . '.tar');
+                    @unlink($this->pg->getDataFolder() . 'arenas/' . $SGname . '/' . $world . '.tar');
                 }
                 unset($tar);
                 $sender->getServer()->loadLevel($world);
                 // END TAR.GZ }
-                //SWarena object
-                $this->pg->arenas[$SWname] = new SGarena($this->pg, $SGname, $slot, $world, $countdown, $maxtime, $void);
+                //arena object
+                $this->pg->arenas[$SGname] = new arena($this->pg, $SGname, $slot, $world, $countdown, $maxtime, $void);
                 $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::GREEN . 'Arena: ' . TextFormat::DARK_GREEN . $SGname . TextFormat::GREEN . ' created successfully!');
                 $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::GREEN . 'Now set spawns with ' . TextFormat::WHITE . '/sg setspawn [slot]');
                 $sender->teleport($sender->getServer()->getLevelByName($world)->getSpawnLocation());
@@ -263,7 +263,7 @@ class commands
                         break;
                     }
                 }
-                if (!($SGname && preg_match('/^[a-z0-9]+[a-z0-9]$/i', $SGname) && strlen($SGname) < 0x10 && strlen($SWname) > 0b10 && array_key_exists($SWname, $this->pg->arenas))) {
+                if (!($SGname && preg_match('/^[a-z0-9]+[a-z0-9]$/i', $SGname) && strlen($SGname) < 0x10 && strlen($SGname) > 0b10 && array_key_exists($SWname, $this->pg->arenas))) {
                     $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'Arena not found here, try ' . TextFormat::WHITE . '/sg create');
                     unset($SGname);
                     break;
@@ -271,7 +271,7 @@ class commands
                 $slot = array_shift($args);
                 if (!($slot && is_numeric($slot) && is_int(($slot + 0)) && $slot < 0x33 && $slot > 0)) {
                     $sender->sendMessage(TextFormat::WHITE . '→' . TextFormat::AQUA . '[slot]' . TextFormat::RED . ' must be an integer <= than 50 and >= 1');
-                    unset($SWname, $slot);
+                    unset($SGname, $slot);
                     break;
                 }
                 $slot += 0;
