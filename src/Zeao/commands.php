@@ -107,7 +107,7 @@ class commands
                  \___||_|    \___| \__,_| \__| \___|
                 */
                 if (!(count($args) > 0b11 && count($args) < 0b101)) {
-                    $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'Usage: /sg ' . TextFormat::GREEN . 'create [SWname] [slots] [countdown] [maxGameTime]');
+                    $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'Usage: /sg ' . TextFormat::GREEN . 'create [SGname] [slots] [countdown] [maxGameTime]');
                     break;
                 }
                 $fworld = $sender->getLevel()->getFolderName();
