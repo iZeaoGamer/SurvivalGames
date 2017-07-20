@@ -1,6 +1,6 @@
 <?php
 
-namespace Zeao\SGarena;
+namespace Zeao;
 
 
 use pocketmine\Player;
