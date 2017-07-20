@@ -37,20 +37,20 @@ class Main extends PluginBase
     public function onLoad()
     {
         if (!is_dir($this->getDataFolder()))
-            @mkdir($this->getDataFolder() . "\x61\x72\x65\x6e\x61\x73", 0755, true);
+            @mkdir($this->getDataFolder() . "Test", 0755, true);
         //This changes worlds NBT name with folders ones to avoid problems //world folder name should be used instead of doing this
         try {
-            foreach (scandir($this->getServer()->getDataPath() . "\x77\x6f\x72\x6c\x64\x73") as $worldDir) {
-                if (is_dir($this->getServer()->getDataPath() . "\x77\x6f\x72\x6c\x64\x73\x2f" . $worldDir) && is_file($this->getServer()->getDataPath() . "\x77\x6f\x72\x6c\x64\x73\x2f" . $worldDir . "\x2f\x6c\x65\x76\x65\x6c\x2e\x64\x61\x74")) {
+            foreach (scandir($this->getServer()->getDataPath() . "Test") as $worldDir) {
+                if (is_dir($this->getServer()->getDataPath() . "Test" . $worldDir) && is_file($this->getServer()->getDataPath() . "Test" . $worldDir . "Test")) {
                     $nbt = new NBT(NBT::BIG_ENDIAN);
-                    $nbt->readCompressed(file_get_contents($this->getServer()->getDataPath() . "\x77\x6f\x72\x6c\x64\x73\x2f" . $worldDir . "\x2f\x6c\x65\x76\x65\x6c\x2e\x64\x61\x74"));
+                    $nbt->readCompressed(file_get_contents($this->getServer()->getDataPath() . "Test" . $worldDir . "Test"));
                     $levelData = $nbt->getData();
-                    if (array_key_exists("\x44\x61\x74\x61", $levelData) && $levelData["\x44\x61\x74\x61"] instanceof Compound) {
-                        $levelData = $levelData["\x44\x61\x74\x61"];
-                        if (array_key_exists("\x4c\x65\x76\x65\x6c\x4e\x61\x6d\x65", $levelData) && $levelData["\x4c\x65\x76\x65\x6c\x4e\x61\x6d\x65"] != $worldDir) {
-                            $levelData["\x4c\x65\x76\x65\x6c\x4e\x61\x6d\x65"] = new Str("\x4c\x65\x76\x65\x6c\x4e\x61\x6d\x65", $worldDir);
-                            $nbt->setData(new Compound('', ["\x44\x61\x74\x61" => $levelData]));
-                            file_put_contents($this->getServer()->getDataPath() . "\x77\x6f\x72\x6c\x64\x73\x2f" . $worldDir . "\x2f\x6c\x65\x76\x65\x6c\x2e\x64\x61\x74", $nbt->writeCompressed());
+                    if (array_key_exists("Test", $levelData) && $levelData["Test"] instanceof Compound) {
+                        $levelData = $levelData["Test"];
+                        if (array_key_exists("Test", $levelData) && $levelData["Test"] != $worldDir) {
+                            $levelData["Test"] = new Str("Test", $worldDir);
+                            $nbt->setData(new Compound('', ["Test" => $levelData]));
+                            file_put_contents($this->getServer()->getDataPath() . "Test" . $worldDir . "Test", $nbt->writeCompressed());
                         }
                         unset($worldDir, $levelData, $nbt);
                     } else {
