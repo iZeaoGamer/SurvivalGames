@@ -192,7 +192,7 @@ class Main extends PluginBase
             } else {
                 $this->getLogger()->critical('I can\'t find an economy plugin, the reward feature will be disabled');
                 $this->getLogger()->critical('Supported economy plugins:');
-                $this->getLogger()->critical('EconomyAPI §42.0.9');
+                $this->getLogger()->critical('EconomyAPI §45.7');
                 $this->getLogger()->critical('PocketMoney §44.0.1');
                 $this->getLogger()->critical('MassiveEconomy §41.0 R3');
                 $this->economy = null;
