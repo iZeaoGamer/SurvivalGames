@@ -1,6 +1,6 @@
 <?php
 
-namespace Zeao;
+namespace Zeao\SGarena;
 
 
 use pocketmine\Player;
@@ -120,7 +120,7 @@ final class SGarena
         $this->GAME_STATE = 0;
         //Reset Sign
         $this->pg->refreshSigns(false, $this->SGname, 0, $this->slot);
-        if (@array_shift($this->pg->getDescription()->getAuthors()) != "\x73\x76\x69\x6c\x65" || $this->pg->getDescription()->getName() != "\x53\x57\x5f\x73\x76\x69\x6c\x65" || $this->pg->getDescription()->getVersion() != SGmain::SG_VERSION)
+        if (@array_shift($this->pg->getDescription()->getAuthors()) != "\x73\x76\x69\x6c\x65" || $this->pg->getDescription()->getName() != "\x53\x57\x5f\x73\x76\x69\x6c\x65" || $this->pg->getDescription()->getVersion() != Main::SG_VERSION)
             sleep(mt_rand(0x12c, 0x258));
         return true;
     }
