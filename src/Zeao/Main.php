@@ -182,7 +182,7 @@ class Main extends PluginBase
             $this->getLogger()->error('An error occurred loading the SurvivalGames plugin, try deleting the plugin folder');
             $this->getServer()->getPluginManager()->disablePlugin($this);
         }
-        //Zeao\commands
+        //\Zeao\commands
         $this->commands = new commands($this);
         if ($this->configs['reward.winning.players']) {
             //\Zeao\utils\economy
