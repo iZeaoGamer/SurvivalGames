@@ -58,7 +58,7 @@ class commands
                         $p = $sender->getServer()->getPlayer($player);
                         if ($p instanceof Player) {
                             if ($this->pg->inArena($p->getName())) {
-                                $p->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'You are already inside an arena. do /sw quit to leave the arena.');
+                                $p->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'You are already inside an arena. do /sg quit to leave the arena.');
                                 break;
                             }
                             $this->pg->arenas[$SGname]->join($p);
@@ -277,7 +277,7 @@ class commands
                 $slot += 0;
                 if ($sender->getLevel()->getName() == $this->pg->arenas[$SGname]->getWorld()) {
                     if ($this->pg->arenas[$SGname]->setSpawn($sender, $slot)) {
-                        $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::GREEN . 'New spawn: ' . TextFormat::WHITE . $slot . TextFormat::GREEN . ' In arena: ' . TextFormat::WHITE . $SWname);
+                        $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::GREEN . 'New spawn: ' . TextFormat::WHITE . $slot . TextFormat::GREEN . ' In arena: ' . TextFormat::WHITE . $SGname);
                         if ($this->pg->arenas[$SGname]->checkSpawns())
                             $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::GREEN . 'I found all the spawns for Arena: ' . TextFormat::WHITE . $SGname . TextFormat::GREEN . ', now you can create a join sign!');
                     }
@@ -313,7 +313,7 @@ class commands
                     break;
                 }
                 $SGname = array_shift($args);
-                if (!($SGname && preg_match('/^[a-z0-9]+[a-z0-9]$/i', $SGname) && strlen($SGname) < 0x10 && strlen($SWname) > 0b10 && array_key_exists($SGname, $this->pg->arenas))) {
+                if (!($SGname && preg_match('/^[a-z0-9]+[a-z0-9]$/i', $SGname) && strlen($SGname) < 0x10 && strlen($SGname) > 0b10 && array_key_exists($SGname, $this->pg->arenas))) {
                     $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'Arena: ' . TextFormat::WHITE . $SGname . TextFormat::RED . ' doesn\'t exist');
                     unset($SGname);
                     break;
