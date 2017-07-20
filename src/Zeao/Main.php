@@ -22,7 +22,7 @@ class Main extends PluginBase
     const SG_VERSION = '1.0.0';
     /** @var commands */
     private $commands;
-    /** @var arena[] */
+    /** @var SGarena[] */
     public $arenas = [];
     /** @var array */
     public $signs = [];
