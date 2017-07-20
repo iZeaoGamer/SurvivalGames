@@ -314,7 +314,7 @@ class commands
                 }
                 $SGname = array_shift($args);
                 if (!($SGname && preg_match('/^[a-z0-9]+[a-z0-9]$/i', $SGname) && strlen($SGname) < 0x10 && strlen($SWname) > 0b10 && array_key_exists($SGname, $this->pg->arenas))) {
-                    $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'Arena: ' . TextFormat::WHITE . $SWname . TextFormat::RED . ' doesn\'t exist');
+                    $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'Arena: ' . TextFormat::WHITE . $SGname . TextFormat::RED . ' doesn\'t exist');
                     unset($SGname);
                     break;
                 }
@@ -324,9 +324,9 @@ class commands
                     break;
                 }
                 $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::GREEN . 'Please wait, this can take a bit');
-                $this->pg->arenas[$SWname]->stop(true);
+                $this->pg->arenas[$SGname]->stop(true);
                 foreach ($this->pg->signs as $loc => $name) {
-                    if ($SWname == $name) {
+                    if ($SGname == $name) {
                         $ex = explode(':', $loc);
                         if ($sender->getServer()->loadLevel($ex[0b11])) {
                             $block = $sender->getServer()->getLevelByName($ex[0b11])->getBlock(new Vector3($ex[0], $ex[1], $ex[0b10]));
