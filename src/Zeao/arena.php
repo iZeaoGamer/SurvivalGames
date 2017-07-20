@@ -13,7 +13,7 @@ use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
 use pocketmine\tile\Chest;
 use pocketmine\item\Item;
-final class arena
+final class SGarena
 {
     /** @var int */
     public $GAME_STATE = 0;//0 -> GAME_COUNTDOWN | 1 -> GAME_RUNNING | 2 -> no-pvp
@@ -478,7 +478,7 @@ final class arena
                         $pl->sendMessage(str_replace('{SGNAME}', $this->SGname, str_replace('{PLAYER}', $p->getName(), $this->pg->lang['server.broadcast.winner'])));
                     }
                     //Economy reward
-                    if ($this->pg->configs['reward.winning.players'] && is_numeric($this->pg->configs['reward.value']) && is_int(($this->pg->configs['reward.value'] + 0)) && $this->pg->economy instanceof \svile\sg\utils\SWeconomy && $this->pg->economy->getApiVersion() != 0) {
+                    if ($this->pg->configs['reward.winning.players'] && is_numeric($this->pg->configs['reward.value']) && is_int(($this->pg->configs['reward.value'] + 0)) && $this->pg->economy instanceof \svile\sg\utils\economy && $this->pg->economy->getApiVersion() != 0) {
                         $this->pg->economy->addMoney($p, (int)$this->pg->configs['reward.value']);
                         $p->sendMessage(str_replace('{MONEY}', $this->pg->economy->getMoney($p), str_replace('{VALUE}', $this->pg->configs['reward.value'], $this->pg->lang['winner.reward.msg'])));
                     }
