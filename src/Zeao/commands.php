@@ -279,7 +279,7 @@ class commands
                     if ($this->pg->arenas[$SGname]->setSpawn($sender, $slot)) {
                         $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::GREEN . 'New spawn: ' . TextFormat::WHITE . $slot . TextFormat::GREEN . ' In arena: ' . TextFormat::WHITE . $SWname);
                         if ($this->pg->arenas[$SGname]->checkSpawns())
-                            $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::GREEN . 'I found all the spawns for Arena: ' . TextFormat::WHITE . $SWname . TextFormat::GREEN . ', now you can create a join sign!');
+                            $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::GREEN . 'I found all the spawns for Arena: ' . TextFormat::WHITE . $SGname . TextFormat::GREEN . ', now you can create a join sign!');
                     }
                 }
                 break;
@@ -376,7 +376,7 @@ class commands
                         $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::GREEN . 'Deleted all SG signs !');
                         unset($SGname, $loc, $name, $ex, $block);
                     } else {
-                        $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'Arena: ' . TextFormat::WHITE . $SWname . TextFormat::RED . ' doesn\'t exist');
+                        $sender->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'Arena: ' . TextFormat::WHITE . $SGname . TextFormat::RED . ' doesn\'t exist');
                         unset($SGname);
                     }
                     break;
