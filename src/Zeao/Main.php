@@ -235,7 +235,7 @@ class Main extends PluginBase
                         'void_Y' => 0,
                         'spawns' => [],
                     ]);
-                    $this->arenas[$config->get('name')] = new arena($this, $config->get('name'), ($config->get('slot') + 0), $config->get('world'), ($config->get('countdown') + 0), ($config->get('maxGameTime') + 0), ($config->get('void_Y') + 0));
+                    $this->arenas[$config->get('name')] = new SGarena($this, $config->get('name'), ($config->get('slot') + 0), $config->get('world'), ($config->get('countdown') + 0), ($config->get('maxGameTime') + 0), ($config->get('void_Y') + 0));
                     unset($config);
                 } else {
                     return false;
