@@ -37,3 +37,29 @@ Thank you, and make sure to stay tuned if you have found a Survivalgames plugin,
 Thank you, and we hope that we've fixed most bugs.
 
 
+## Can we use normal builds for Betas instead of the official BETA release?
+Yes, actually you can.
+Just go to this link here: https://poggit.pmmp.io/ci/iZeaoGamer/SurvivalGames/SurvivalGames
+It should give a more up-to date view regarding builds. All builds will end up there, for BETA Builds. We usually release BETA builds on the poggit page, before releasing them publickly on the github releases tab. If however the Builds doesn't seem to be updating, then you can download the zip file of this. Here's the download file for the ZIp file: https://github.com/iZeaoGamer/SurvivalGames/archive/master.zip
+
+# Keep in mind that this link is live, meaning every time we update something on our github page, you will be able to get the latest updates, or changes we have added to this github page.
+
+## What MCPE versions are supported on this plugin?
+
+The MCPE versions supported, are:
+
+* 1.1.0
+* 1.1.1
+* 1.1.2
+* 1.1.3
+* 1.1.4 (Not tested, but should work.)
+
+
+## What Server softwares are compatible / supported with this plugin?
+
+* GenisysPro
+* Pocketmine-MP
+
+
+
+
