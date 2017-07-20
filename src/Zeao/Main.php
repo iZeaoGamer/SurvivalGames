@@ -89,9 +89,9 @@ class Main extends PluginBase
             $this->getLogger()->notice('A new update is available with the config files. Updating them, and re-adding them. Updating the config files. Make sure to delete old arenas if aren\'t working');
             @unlink($this->getDataFolder() . 'configs.yml');
             @unlink($this->getDataFolder() . 'lang.yml');
-            $this->saveResource('config.yml', true);
+            $this->saveResource('configs.yml', true);
         } elseif ($v == '1st') {
-            $this->saveResource('config.yml', true);
+            $this->saveResource('configs.yml', true);
         }
         unset($v);
         //Config files: /configs.yml /lang.yml & for arenas: /arenas/SGname/settings.yml
