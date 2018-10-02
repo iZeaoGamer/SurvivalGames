@@ -16,8 +16,7 @@ class economy
     private $pg;
     /** @var bool|\pocketmine\plugin\Plugin */
     private $api;
-    public function __construct(Main $plugin)
-    {
+    public function __construct(Main $plugin){
         $this->pg = $plugin;
         $api = $this->pg->getServer()->getPluginManager()->getPlugin('EconomyAPI');
         if ($api != false && $api instanceof Plugin && $api->getDescription()->getVersion() == '5.7') {
@@ -49,8 +48,7 @@ class economy
      * @param bool $string
      * @return int|string
      */
-    public function getApiVersion($string = false)
-    {
+    public function getApiVersion(bool $string = false) : int {
         switch ($this->ver) {
             case 1:
                 if ($string)
@@ -79,8 +77,7 @@ class economy
      * @param int $amount
      * @return bool
      */
-    public function addMoney(Player $player, $amount = 0)
-    {
+    public function addMoney(Player $player, int $amount = 0) : bool{
         switch ($this->ver) {
             case 1:
                 if ($this->api->addMoney($player, $amount, true))
@@ -105,8 +102,7 @@ class economy
      * @param int $amount
      * @return bool
      */
-    public function takeMoney(Player $player, $amount = 0)
-    {
+    public function takeMoney(Player $player, int $amount = 0) : int{
         switch ($this->ver) {
             case 1:
                 if ($this->api->reduceMoney($player, $amount, true))
@@ -130,8 +126,7 @@ class economy
      * @param Player $player
      * @return bool|int
      */
-    public function getMoney(Player $player)
-    {
+    public function getMoney(Player $player) : int{
         switch ($this->ver) {
             case 1:
                 $money = $this->api->myMoney($player);
