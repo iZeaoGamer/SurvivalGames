@@ -1,20 +1,20 @@
 <?php
 
 namespace Zeao;
-use pocketmine\scheduler\PluginTask;
-class timer extends PluginTask
+
+use pocketmine\scheduler\Task;
+use Zeao\Main;
+
+class timer extends Task
 {
     /** @var int */
     private $seconds = 0;
     /** @var bool */
     private $tick = false;
-    public function __construct(Main $plugin)
-    {
-        parent::__construct($plugin);
+    public function __construct(Main $plugin){
         $this->tick = (bool)$plugin->configs['sign.tick'];
     }
-    public function onRun($tick)
-    {
+    public function onRun(int $tick) : void{
         foreach ($this->getOwner()->arenas as $SGname => $SGarena)
             $SGarena->tick();
         if ($this->tick) {
