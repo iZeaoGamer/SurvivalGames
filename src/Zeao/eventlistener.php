@@ -28,12 +28,10 @@ class eventlistener implements Listener
 {
     /** @var Main */
     private $pg;
-    public function __construct(Main $plugin)
-    {
+    public function __construct(Main $plugin){
         $this->pg = $plugin;
     }
-    public function onSignChange(SignChangeEvent $ev)
-    {
+    public function onSignChange(SignChangeEvent $ev){
         if ($ev->getLine(0) != 'sg' || $ev->getPlayer()->isOp() == false)
             return;
         //Checks if the arena exists
@@ -73,8 +71,7 @@ class eventlistener implements Listener
         $this->pg->refreshSigns(true);
         unset($SGname, $world);
     }
-    public function onInteract(PlayerInteractEvent $ev)
-    {
+    public function onInteract(PlayerInteractEvent $ev){
         if ($ev->getAction() !== PlayerInteractEvent::RIGHT_CLICK_BLOCK)
             return;
         //In-arena Tap
@@ -93,8 +90,7 @@ class eventlistener implements Listener
             $this->pg->arenas[$this->pg->signs[$key]]->join($ev->getPlayer());
         unset($key);
     }
-    public function onLevelChange(EntityLevelChangeEvent $ev)
-    {
+    public function onLevelChange(EntityLevelChangeEvent $ev){
         if ($ev->getEntity() instanceof Player) {
             foreach ($this->pg->arenas as $a) {
                 if ($a->inArena($ev->getEntity()->getName())) {
@@ -104,8 +100,7 @@ class eventlistener implements Listener
             }
         }
     }
-    public function onTeleport(EntityTeleportEvent $ev)
-    {
+    public function onTeleport(EntityTeleportEvent $ev){
         if ($ev->getEntity() instanceof Player) {
             foreach ($this->pg->arenas as $a) {
                 if ($a->inArena($ev->getEntity()->getName())) {
@@ -118,8 +113,7 @@ class eventlistener implements Listener
             }
         }
     }
-    public function onDropItem(PlayerDropItemEvent $ev)
-    {
+    public function onDropItem(PlayerDropItemEvent $ev){
         foreach ($this->pg->arenas as $a) {
             if (($f = $a->inArena($ev->getPlayer()->getName()))) {
                 if ($f == 2) {
@@ -134,8 +128,7 @@ class eventlistener implements Listener
             }
         }
     }
-    public function onPickUp(InventoryPickupItemEvent $ev)
-    {
+    public function onPickUp(InventoryPickupItemEvent $ev){
         if (($p = $ev->getInventory()->getHolder()) instanceof Player) {
             foreach ($this->pg->arenas as $a) {
                 if ($f = $a->inArena($p->getName())) {
@@ -146,8 +139,7 @@ class eventlistener implements Listener
             }
         }
     }
-    public function onItemHeld(PlayerItemHeldEvent $ev)
-    {
+    public function onItemHeld(PlayerItemHeldEvent $ev){
         foreach ($this->pg->arenas as $a) {
             if ($f = $a->inArena($ev->getPlayer()->getName())) {
                 if ($f == 2) {
@@ -160,8 +152,7 @@ class eventlistener implements Listener
             }
         }
     }
-    public function onMove(PlayerMoveEvent $ev)
-    {
+    public function onMove(PlayerMoveEvent $ev){
         foreach ($this->pg->arenas as $a) {
             if ($a->inArena($ev->getPlayer()->getName())) {
                 if ($a->GAME_STATE == 0) {
@@ -290,15 +281,13 @@ class eventlistener implements Listener
             }
         }
     }
-    public function onQuit(PlayerQuitEvent $ev)
-    {
+    public function onQuit(PlayerQuitEvent $ev){
         foreach ($this->pg->arenas as $a) {
             if ($a->closePlayer($ev->getPlayer(), true))
                 break;
         }
     }
-    public function onDeath(PlayerDeathEvent $event)
-    {
+    public function onDeath(PlayerDeathEvent $event){
         if ($event->getEntity() instanceof Player) {
             $p = $event->getEntity();
             foreach ($this->pg->arenas as $a) {
@@ -349,8 +338,7 @@ class eventlistener implements Listener
             }
         }
     }
-    public function onDamage(EntityDamageEvent $ev)
-    {
+    public function onDamage(EntityDamageEvent $ev){
         if ($ev->getEntity() instanceof Player) {
             $p = $ev->getEntity();
             foreach ($this->pg->arenas as $a) {
@@ -431,8 +419,7 @@ class eventlistener implements Listener
             }
         }
     }
-    public function onRespawn(PlayerRespawnEvent $ev)
-    {
+    public function onRespawn(PlayerRespawnEvent $ev){
         if ($this->pg->configs['always.spawn.in.defaultLevel'])
             $ev->setRespawnPosition($this->pg->getServer()->getDefaultLevel()->getSpawnLocation());
         //Removes player things
@@ -441,8 +428,7 @@ class eventlistener implements Listener
         if ($this->pg->configs['clear.effects.on.respawn&join'])
             $ev->getPlayer()->removeAllEffects();
     }
-    public function onBreak(BlockBreakEvent $ev)
-    {
+    public function onBreak(BlockBreakEvent $ev) {
         foreach ($this->pg->arenas as $a) {
             if ($t = $a->inArena($ev->getPlayer()->getName())) {
                 if ($t == 2)
@@ -466,8 +452,7 @@ class eventlistener implements Listener
         }
         unset($key);
     }
-    public function onPlace(BlockPlaceEvent $ev)
-    {
+    public function onPlace(BlockPlaceEvent $ev){
         foreach ($this->pg->arenas as $a) {
             if ($t = $a->inArena($ev->getPlayer()->getName())) {
                 if ($t == 2)
@@ -478,8 +463,7 @@ class eventlistener implements Listener
             }
         }
     }
-    public function onCommand(PlayerCommandPreprocessEvent $ev)
-    {
+    public function onCommand(PlayerCommandPreprocessEvent $ev){
         $command = strtolower($ev->getMessage());
         if ($command{0} == '/') {
             $command = explode(' ', $command)[0];
