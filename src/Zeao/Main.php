@@ -16,6 +16,9 @@ use pocketmine\utils\TextFormat;
 use pocketmine\item\Item;
 use pocketmine\tile\Sign;
 use pocketmine\math\Vector3;
+use Zeao\utils\economy;
+use Zeao\{SGarena, commands};
+
 class Main extends PluginBase
 {
     /** Plugin Version */
@@ -63,8 +66,7 @@ class Main extends PluginBase
             $this->getLogger()->critical($e->getMessage() . ' in §b' . $e->getFile() . '§c on line §b' . $e->getLine());
         }
     }
-    public function onEnable()
-    {
+    public function onEnable() : void{
         if ($this->getDescription()->getVersion() != self::SG_VERSION)
             $this->getLogger()->critical(@gzinflate(@base64_decode('Test=')));
         if (@array_shift($this->getDescription()->getAuthors()) != "Zeao" || $this->getDescription()->getName() != "SurvivalGames" || $this->getDescription()->getVersion() != self::SG_VERSION) {
@@ -175,7 +177,7 @@ class Main extends PluginBase
         $this->lang = $newlang;
         unset($newlang);
         //Register timer and listener
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new timer($this), 19);
+        $this->getScheduler()->scheduleRepeatingTask(new timer($this), 19);
         $this->getServer()->getPluginManager()->registerEvents(new eventlistener($this), $this);
         //Calls loadArenas() & loadSigns() to loads arenas & signs...
         if (!($this->loadSigns() && $this->loadArenas())) {
@@ -186,7 +188,7 @@ class Main extends PluginBase
         $this->commands = new commands($this);
         if ($this->configs['reward.winning.players']) {
             //\Zeao\utils\economy
-            $this->economy = new \Zeao\utils\economy($this);
+            $this->economy = new economy($this);
             if ($this->economy->getApiVersion()) {
                 $this->getLogger()->info('§aUsing: §f' . $this->economy->getApiVersion(true) . '§a as economy api');
             } else {
@@ -200,13 +202,11 @@ class Main extends PluginBase
         }
         $this->getLogger()->info(str_replace('\n', PHP_EOL, @gzinflate(@base64_decode("\x70\x5a\x42\x4e\x43\x6f\x4d\x77\x45\x45\x61\x76knVBs3dVS8VFWym00I0gUaZJMD8Sk1JP5D08WUlqFm7bWb7vzTcwtarVMotl7na/zLoMubNMmwwt83N8cQGRn3\x67fYBNoE/EdBFBDZFMa7YZgMGuHMcPYrlEqAW+qikQSLoJrGfhIwJ56lnZaRqvklrl200gD8tK38I1v/fQgZkyuuuvBXriKR9\x6f1QYNwlCvUTiis+D5SVPnhXBz//NcH"))));
     }
-    public function onDisable()
-    {
+    public function onDisable() : void{
         foreach ($this->arenas as $name => $arena)
             $arena->stop(true);
     }
-    public function onCommand(CommandSender $sender, Command $command, $label, array $args)
-    {
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
         $this->commands->onCommand($sender, $command, $label, $args);
         return true;
     }
@@ -221,8 +221,7 @@ class Main extends PluginBase
     /**
      * @return bool
      */
-    public function loadArenas()
-    {
+    public function loadArenas() : bool{
         foreach (scandir($this->getDataFolder() . 'arenas/') as $arenadir) {
             if ($arenadir != '..' && $arenadir != '.' && is_dir($this->getDataFolder() . 'arenas/' . $arenadir)) {
                 if (is_file($this->getDataFolder() . 'arenas/' . $arenadir . '/settings.yml')) {
@@ -248,8 +247,7 @@ class Main extends PluginBase
     /**
      * @return bool
      */
-    public function loadSigns()
-    {
+    public function loadSigns() : bool{
         $this->signs = [];
         $r = $this->db->query("SELECT * FROM signs;");
         while ($array = $r->fetchArray(SQLITE3_ASSOC))
@@ -269,8 +267,7 @@ class Main extends PluginBase
      * @param bool $all
      * @return bool
      */
-    public function setSign($SGname, $x, $y, $z, $world, $delete = false, $all = true)
-    {
+    public function setSign(string $SGname, int $x, int $y, int $z, string $world, bool $delete = false, bool $all = true) : bool{
         if ($delete) {
             if ($all)
                 $this->db->query("DELETE FROM signs;");
@@ -301,8 +298,7 @@ class Main extends PluginBase
      * @param int $slot
      * @param string $state
      */
-    public function refreshSigns($all = true, $SGname = '', $players = 0, $slot = 0, $state = '§fTap to join')
-    {
+    public function refreshSigns(bool $all = true, string $SGname = '', int $players = 0, int $slot = 0, string $state = '§fTap to join') {
         if (!$all) {
             $ex = explode(':', array_search($SGname, $this->signs));
             if (count($ex) == 0b100) {
@@ -337,8 +333,7 @@ class Main extends PluginBase
      * @param string $playerName
      * @return bool
      */
-    public function inArena($playerName = '')
-    {
+    public function inArena(string $playerName = '') : bool{
         foreach ($this->arenas as $a) {
             if ($a->inArena($playerName)) {
                 return true;
