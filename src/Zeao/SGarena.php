@@ -48,8 +48,7 @@ final class SGarena
      * @param int $maxtime
      * @param int $void
      */
-    public function __construct(Main $plugin, $SGname = 'sg', $slot = 0, $world = 'world', $countdown = 60, $maxtime = 300, $void = 0)
-    {
+    public function __construct(Main $plugin, string $SGname = 'sg', int $slot = 0, string $world = 'world', int $countdown = 60, int $maxtime = 300, int $void = 0){
         $this->pg = $plugin;
         $this->SGname = $SGname;
         $this->slot = ($slot + 0);
@@ -65,8 +64,7 @@ final class SGarena
     /**
      * @return bool
      */
-    private function reload()
-    {
+    private function reload() : bool{
         //Map reset
         if (!is_file($this->pg->getDataFolder() . 'arenas/' . $this->SGname . '/' . $this->world . '.tar') && !is_file($this->pg->getDataFolder() . 'arenas/' . $this->SGname . '/' . $this->world . '.tar.gz'))
             return false;
@@ -127,8 +125,7 @@ final class SGarena
     /**
      * @return string
      */
-    public function getState()
-    {
+    public function getState() : string{
         $state = TextFormat::WHITE . 'Tap to join';
         switch ($this->GAME_STATE) {
             case 1:
@@ -146,8 +143,7 @@ final class SGarena
      * @param bool $players
      * @return int
      */
-    public function getSlot($players = false)
-    {
+    public function getSlot(bool $players = false) : int{
         if ($players)
             return count($this->players);
         return $this->slot;
@@ -157,8 +153,7 @@ final class SGarena
      * @param string $playerName
      * @return string|array
      */
-    public function getWorld($spawn = false, $playerName = '')
-    {
+    public function getWorld(bool $spawn = false, string $playerName = '') : string{
         if ($spawn && array_key_exists($playerName, $this->players))
             return $this->players[$playerName];
         else
@@ -168,8 +163,7 @@ final class SGarena
      * @param string $playerName
      * @return int
      */
-    public function inArena($playerName = '')
-    {
+    public function inArena(string $playerName = '') : int{
         if (array_key_exists($playerName, $this->players))
             return 1;
         if (in_array($playerName, $this->spectators))
@@ -181,7 +175,7 @@ final class SGarena
      * @param int $slot
      * @return bool
      */
-    public function setSpawn(Player $player, $slot = 1)
+    public function setSpawn(Player $player, int $slot = 1) : bool
     {
         if ($slot > $this->slot) {
             $player->sendMessage(TextFormat::AQUA . '→' . TextFormat::RED . 'This arena have only got ' . TextFormat::WHITE . $this->slot . TextFormat::RED . ' slots');
@@ -223,8 +217,7 @@ final class SGarena
     /**
      * @return bool
      */
-    public function checkSpawns()
-    {
+    public function checkSpawns() : bool{
         if (empty($this->spawns))
             return false;
         foreach ($this->spawns as $key => $val) {
@@ -234,8 +227,7 @@ final class SGarena
         return true;
     }
     /** VOID */
-    private function refillChests()
-    {
+    private function refillChests(){
         $contents = $this->pg->getChestContents();
         foreach ($this->pg->getServer()->getLevelByName($this->world)->getTiles() as $tile) {
             if ($tile instanceof Chest) {
@@ -254,8 +246,7 @@ final class SGarena
         unset($contents, $tile);
     }
     /** VOID */
-    public function tick()
-    {
+    public function tick(){
         if ($this->GAME_STATE == 0 && count($this->players) < ($this->pg->configs['needed.players.to.run.countdown'] + 0))
             return;
         $this->time++;
@@ -312,8 +303,7 @@ final class SGarena
      * @param bool $msg
      * @return bool
      */
-    public function join(Player $player, $msg = true)
-    {
+    public function join(Player $player, bool $msg = true) : bool{
         if ($this->GAME_STATE > 0) {
             if ($msg)
                 $player->sendMessage($this->pg->lang['sign.game.running']);
@@ -357,8 +347,7 @@ final class SGarena
      * @param bool $spectate
      * @return bool
      */
-    private function quit($playerName, $left = false, $spectate = false)
-    {
+    private function quit(string $playerName, bool $left = false, bool $spectate = false) : bool{
         if (in_array($playerName, $this->spectators)) {
             unset($this->spectators[array_search($playerName, $this->spectators)]);
             foreach ($this->players as $name => $spawn) {
@@ -390,8 +379,7 @@ final class SGarena
      * @param bool $spectate
      * @return bool
      */
-    public function closePlayer(Player $p, $left = false, $spectate = false)
-    {
+    public function closePlayer(Player $p, bool $left = false, bool $spectate = false) : bool{
         if ($this->quit($p->getName(), $left, $spectate)) {
             $p->gamemode = 4;//Just to make sure setGamemode() won't return false if the gm is the same
             $p->setGamemode($p->getServer()->getDefaultGamemode());
@@ -460,8 +448,7 @@ final class SGarena
      * @param bool $force
      * @return bool
      */
-    public function stop($force = false)
-    {
+    public function stop(bool $force = false) : bool{
         $this->pg->getServer()->loadLevel($this->world);
         //CLOSE SPECTATORS
         foreach ($this->spectators as $playerName) {
